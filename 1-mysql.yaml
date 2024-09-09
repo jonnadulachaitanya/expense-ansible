@@ -6,3 +6,9 @@
     ansible.builtin.package:
       name: mysql-server
       state: present
+    
+  - name: start services
+    ansible.uiltin.service:
+      name: mysqld
+      state: started
+      
