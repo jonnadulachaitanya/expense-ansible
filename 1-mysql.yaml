@@ -1,39 +1,61 @@
-- name: mysql configuratin
+# - name: mysql configuratin
+#   hosts: mysql
+#   become: yes
+#   vars:
+#     mysql_root_password: ExpenseApp@1
+#     login_host: mysql.chaitanyaproject.online
+#   tasks:
+#   - name: install mysql
+#     ansible.builtin.package:
+#       name: mysql-server
+#       state: present
+    
+#   - name: start services
+#     ansible.builtin.service:
+#       name: mysqld
+#       state: started
+#       enabled: yes
+#   - name: install PyMySQL
+#     ansible.builtin.pip:
+#       name:
+#       - PyMySQL
+#       executable: pip3.9
+      
+#   - name: connect mysql server #please find the module link to check the password created or not, https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_info_module.html#ansible-collections-community-mysql-mysql-info-module     
+#     community.mysql.mysql_info:
+#       login_user: root
+#       login_password: "{{mysql_root_password}}"
+#       login_host: "{{login_host}}"
+#     ignore_errors: true
+
+#     register: mysql_info
+
+#   - name: print the output of the above connect details
+#     ansible.builtin.debug:
+#       msg: "{{mysql_info}}"
+
+#   - name: setup mysql root password
+#     ansible.builtin.command: "mysql_secure_installation --set-root-pass {{mysql_root_password}}"
+#     when: mysql_info.failed is true       #"failed": true, because it is boolean so we mention is true
+
+
+
+- name: mysql configure
   hosts: mysql
   become: yes
-  vars:
-    mysql_root_password: ExpenseApp@1
-    login_host: mysql.chaitanyaproject.online
+  #vars:
+    
+
+
+
+  
   tasks:
   - name: install mysql
     ansible.builtin.package:
       name: mysql-server
       state: present
-    
-  - name: start services
+  - name: start mysql
     ansible.builtin.service:
       name: mysqld
       state: started
       enabled: yes
-  - name: install PyMySQL
-    ansible.builtin.pip:
-      name:
-      - PyMySQL
-      executable: pip3.9
-      
-  - name: connect mysql server #please find the module link to check the password created or not, https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_info_module.html#ansible-collections-community-mysql-mysql-info-module     
-    community.mysql.mysql_info:
-      login_user: root
-      login_password: "{{mysql_root_password}}"
-      login_host: "{{login_host}}"
-    ignore_errors: true
-
-    register: mysql_info
-
-  - name: print the output of the above connect details
-    ansible.builtin.debug:
-      msg: "{{mysql_info}}"
-
-  - name: setup mysql root password
-    ansible.builtin.command: "mysql_secure_installation --set-root-pass {{mysql_root_password}}"
-    when: mysql_info.failed is true       #"failed": true, because it is boolean so we mention is true
