@@ -1,6 +1,9 @@
 - name: mysql configuratin
   hosts: mysql
   become: yes
+  vars:
+    mysql_root_password: ExpenseApp@1
+    local_host: mysql.chaitanyaproject.online
   tasks:
   - name: install mysql
     ansible.builtin.package:
@@ -12,4 +15,9 @@
       name: mysqld
       state: started
       enabled: yes
-      
+
+  - name: connect mysql server #please find the module link to check the password created or not, https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_info_module.html#ansible-collections-community-mysql-mysql-info-module     
+    community.mysql.mysql_info:
+      login_user: root
+      login_password: "{{mysql_root_password}}"
+      login_host: "{{login_host}}"
