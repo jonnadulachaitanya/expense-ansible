@@ -3,7 +3,7 @@
   become: yes
   vars:
     mysql_root_password: ExpenseApp@1
-    local_host: mysql.chaitanyaproject.online
+    login_host: mysql.chaitanyaproject.online
   tasks:
   - name: install mysql
     ansible.builtin.package:
