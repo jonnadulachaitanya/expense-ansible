@@ -21,3 +21,9 @@
       login_user: root
       login_password: "{{mysql_root_password}}"
       login_host: "{{login_host}}"
+
+    register: mysql_info
+
+  - name: print the output of the above connect details
+    ansible.builtin.debug:
+      msg: "{{mysql_info}}"
