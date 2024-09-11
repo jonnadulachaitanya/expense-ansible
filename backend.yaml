@@ -1,6 +1,9 @@
 - name: configure backend server
-  hosts: backened
+  hosts: backend
   become: yes
+  vars:
+    mysql_root_password: ExpenseApp@1
+    login_host: "backend.chaitanyaproject.online"
   tasks:
   - name: disable default nodejs
     ansible.builtin.command: dnf module disable nodejs -y
@@ -32,5 +35,26 @@
       dest: /app
 
   - name: npm install
-    ansible.builtin.package
+    ansible.builtin.command: npm install
+    args:
+      chdir: /app
+  - name: create backend.service file
+    ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+
+  - name: import mysql data
+    community.mysql.mysql_db:
+    login_user: root
+    login_host: "{{login_host}}"
+    login_password: "{{mysql_root_password}}"
+    target: /app/schema/backend.sql
+    name: all
+    state: import
+
+  - name: daemon reload
+    ansible.builtin.systemd-service:
+      daemon_reload: true
+      state: restarted
+      name: backend
   
