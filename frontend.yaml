@@ -12,3 +12,7 @@
       name: nginx
       state: started
       enabled: yes
+
+  - name: remove files in html
+    ansible.builtin.files:
+      
