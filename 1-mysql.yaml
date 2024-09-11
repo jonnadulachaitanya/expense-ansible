@@ -19,6 +19,7 @@
     ansible.builtin.pip:
       name:
       - PyMySQL
+      - cryptography
       executable: pip3.9
       
   - name: connect mysql server #please find the module link to check the password created or not, https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_info_module.html#ansible-collections-community-mysql-mysql-info-module     
