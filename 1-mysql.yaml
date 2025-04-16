@@ -37,3 +37,13 @@
   - name: setup mysql root password
     ansible.builtin.command: "mysql_secure_installation --set-root-pass {{mysql_root_password}}"
     when: mysql_info.failed is true       #"failed": true, because it is boolean so we mention as true
+
+
+
+
+
+#To connect MYSQL db from ansible or any other server:
+# mysql -h 10.0.21.119 -u root -pExpenseApp@1
+# show databases;
+# use transactions;
+# select * from transactions;
