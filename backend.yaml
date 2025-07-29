@@ -19,10 +19,11 @@
     - nodejs
     - mysql
 
-  - name: installing PyMySQL
+  - name: installing PyMySQL and cryptography
     ansible.builtin.pip:
       name:
       - PyMySQL
+      - cryptography
       executable: pip3.9
     
   - name: create expense user
