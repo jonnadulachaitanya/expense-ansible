@@ -2,7 +2,7 @@
   hosts: backend
   become: true
   vars:
-    login_host: "backend.chaitanyaproject.online"
+    login_host: "mysql.chaitanyaproject.online"
     login_root_password: "ExpenseApp@1"
     login_user: root
 
@@ -56,7 +56,7 @@
       - PyMySQL
       executable: pip3.9
 
-  - name: importing mysql dafault
+  - name: importing mysql data
     community.mysql.mysql_db: # Here we need PySql package is required so we installed packge to connect mysql.
       login_user: "{{ login_user }}"
       login_host: "{{ login_host }}"
