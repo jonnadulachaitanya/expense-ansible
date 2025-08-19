@@ -1,5 +1,6 @@
 - name: configuring backend server
   hosts: backend
+  become: true
   vars:
     login_hostname: "chaitanyaproject.online"
     login_password: "ExpenseApp@1"
