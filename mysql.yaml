@@ -1,0 +1,33 @@
+- name: install mysql server
+  hosts: mysql
+  become: true
+  
+  vars:
+    login_user: "root"
+    login_hostname: "mysql.chaitanyaproject.online"
+    login_password: "ExpenseApp@1"
+  tasks:
+  - name: install mysql server
+    ansible.builtin.package:
+      name: mysql-server
+      state: present
+
+  - name: starting mysql service
+    ansible.builtin.service:
+      name: mysqld
+      state: started
+      enabled: yes
+
+  - name: connect mysql server
+    community.mysql.mysql_info:
+      login_user: "{{ login_user }}"
+      login_hostname: "{{ login_hostname }}"
+      login_password:  "{{ login_password }}"
+    ignore_errors: true
+    register: mysql_info
+
+  - name: print the mysql server information
+    ansible.builtin.debug:
+      msg: "{{ mysql_info }}"
+
+
