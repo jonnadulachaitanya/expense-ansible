@@ -17,8 +17,11 @@
 
   - name: install nodejs
     ansible.builtin.package:
-      name: nodejs
+      name: "{{ item }}"
       state: present
+    loop:
+    - nodejs
+    - MySGL
 
   - name: create expense user
     ansible.builtin.user: 
@@ -51,7 +54,7 @@
       dest: /etc/systemd/system/backend.service
 
   - name: importing mysql dafault
-    community.mysql.mysql_db:
+    community.mysql.mysql_db: # Here we need PySql package is required so we installed packge to connect mysql.
       login_user: "{{ login_user }}"
       login_host: "{{ login_host }}"
       login_password: "{{ login_root_password }}"
