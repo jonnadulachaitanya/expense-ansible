@@ -1,9 +1,9 @@
 - name: configuring backend server
   hosts: backend
   become: true
-  vars:
-    login_hostname: "backend.chaitanyaproject.online"
-    login_password: "ExpenseApp@1"
+  # vars:
+  #   login_hostname: "backend.chaitanyaproject.online"
+  #   login_password: "ExpenseApp@1"
 
 
   tasks:
@@ -15,12 +15,9 @@
 
   - name: install nodejs
     ansible.builtin.package:
-      name: "{{ item }}"
+      name: nodejs
       state: present
-    loop:
-    - mysql
-    - nodejs
-
+      
   - name: create expense user
     ansible.builtin.user: 
       name: expense
