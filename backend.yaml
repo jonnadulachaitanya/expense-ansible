@@ -55,6 +55,11 @@
       - PyMySQL
       executable: pip3.9
 
+  - name: install MySQL client
+    ansible.builtin.package:
+      name: mysql
+      state: present
+
   - name: importing mysql data
     community.mysql.mysql_db: # Here we need PySql package is required so we installed packge to connect mysql.
       login_user: root
