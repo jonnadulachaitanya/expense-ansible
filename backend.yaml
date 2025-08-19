@@ -16,8 +16,12 @@
 
   - name: install nodejs
     ansible.builtin.package:
-      name: nodejs
+      name: "{{ item }}"
       state: present
+
+    loop:
+    - nodejs
+    - mysql
 
   - name: create expense user
     ansible.builtin.user: 
@@ -55,18 +59,19 @@
       - PyMySQL
       executable: pip3.9
 
-  - name: install MySQL client
-    ansible.builtin.package:
-      name: mysql
-      state: present
-
   - name: importing mysql data
-    community.mysql.mysql_db: # Here we need PySql package is required so we installed packge to connect mysql.
+    community.mysql.mysql_db: # Here we need PySql package is required so we installed PyMySQL package and mysql client to connect mysql database.
       login_user: root
       login_host: "{{ login_host }}"
       login_password: "{{ login_root_password }}"
       target: /app/schema/backend.sql
       name: all
       state: import
+
+  - name: daemon reload
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+      state: restarted
+      name: backend
 
 
