@@ -32,5 +32,5 @@
   - name: extract the code
     ansible.builtin.unarchive:
       src: /tmp/frontend.zip #by default ansible thinks this is in ansible server.
-      dest: /app
+      dest: /usr/share/nginx/html
       remote_src: yes #the file is already there in remote server so we are mentioning this.
