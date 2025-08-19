@@ -2,7 +2,7 @@
   hosts: backend
   become: true
   vars:
-    login_hostname: "chaitanyaproject.online"
+    login_hostname: "backend.chaitanyaproject.online"
     login_password: "ExpenseApp@1"
 
 
