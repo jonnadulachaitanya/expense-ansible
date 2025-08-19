@@ -4,7 +4,6 @@
   vars:
     login_host: "mysql.chaitanyaproject.online"
     login_root_password: "ExpenseApp@1"
-    login_user: root
 
 
 
@@ -58,10 +57,10 @@
 
   - name: importing mysql data
     community.mysql.mysql_db: # Here we need PySql package is required so we installed packge to connect mysql.
-      login_user: "{{ login_user }}"
+      login_user: root
       login_host: "{{ login_host }}"
       login_password: "{{ login_root_password }}"
-      target: /app/schema/backend.PyMySQL
+      target: /app/schema/backend.sql
       name: all
       state: dump
 
