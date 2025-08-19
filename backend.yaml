@@ -2,8 +2,8 @@
   hosts: backend
   become: true
   vars:
-    login_host: "mysql.chaitanyaproject.online"
-    login_root_password: "ExpenseApp@1"
+    login_host: mysql.chaitanyaproject.online
+    login_root_password: ExpenseApp@1
 
 
 
