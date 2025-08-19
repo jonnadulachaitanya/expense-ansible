@@ -34,3 +34,13 @@
       src: /tmp/frontend.zip #by default ansible thinks this is in ansible server.
       dest: /usr/share/nginx/html
       remote_src: yes #the file is already there in remote server so we are mentioning this.
+
+  - name: copy expense.conf file to remote
+    ansible.builtin.copy:
+      src: expense.conf
+      dest: /etc/nginx/default.d/expense.conf
+
+  - name: restart nginx server
+    ansible.builtin.service:
+      name: nginx
+      state: restarted
