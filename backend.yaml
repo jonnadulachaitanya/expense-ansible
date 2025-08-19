@@ -1,6 +1,8 @@
 - name: configuring backend server
   hosts: backend
   vars:
+    login_hostname: "chaitanyaproject.online"
+    login_password: "ExpenseApp@1"
 
 
   tasks:
@@ -11,3 +13,13 @@
     ansible.builtin.command: dnf module enable nodejs:20 -y
 
   - name: install nodejs
+    ansible.builtin.package:
+      name: "{{ item }}"
+      state: present
+    loop:
+    - mysql
+    - nodejs
+
+  - name: create expense user
+    ansible.builtin.user: 
+      name: expense
